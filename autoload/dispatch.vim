@@ -1245,7 +1245,7 @@ function! dispatch#complete(file, ...) abort
       let label = 'Failure:'
     elseif status == 0
       echohl DispatchSuccessMsg
-      autocmd User DispatchFinishedSuccess
+      doautocmd User DispatchFinishedSuccess
       let label = 'Success:'
     else
       echohl DispatchCompleteMsg
