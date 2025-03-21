@@ -1240,13 +1240,16 @@ function! dispatch#complete(file, ...) abort
       echohl DispatchAbortedMsg
       let label = 'Aborted:'
     elseif status > 0
+      doautocmd User DispatchFinishedFailed
       echohl DispatchFailureMsg
       let label = 'Failure:'
     elseif status == 0
       echohl DispatchSuccessMsg
+      autocmd User DispatchFinishedSuccess
       let label = 'Success:'
     else
       echohl DispatchCompleteMsg
+      doautocmd User DispatchFinishedCompleted
       let label = 'Complete:'
     endif
     call s:echo_truncated(label . ' !', request.expanded . ' ' . s:postfix(request))
